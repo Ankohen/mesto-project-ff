@@ -1,39 +1,30 @@
-export function openModal(popup) {
-    popup.classList.add("popup_is-opened");
-    document.addEventListener("keydown", closePopupOnEsc);
+// Функция открытия попапа
+export function openModalWindow(popup) {
+  popup.classList.add("popup_is-opened");
 }
 
-export function closeModal(popup) {
-    if (popup) {
-        popup.classList.remove("popup_is-opened");
-        document.removeEventListener("keydown", closePopupOnEsc);
-
-        const form = popup.querySelector("form");
-        if (form) {
-            form.reset();
-        }
+// Функция закрытия попапа
+export function closeModalWindow(popup) {
+  if (popup) {
+    popup.classList.remove("popup_is-opened");
+    const form = popup.querySelector("form");
+    if (form) {
+      form.reset();
     }
+  }
 }
 
+// Функция закрытия попапа при клике за его пределы
 export function closeOverlayWindow(evt) {
-    if (evt.target === evt.currentTarget) {
-        closeModal(evt.target.closest('.popup'));
-    }
+  if (evt.target === evt.currentTarget) {
+    closeModalWindow(evt.currentTarget);
+  }
 }
 
-export function openCard(link, name) {
-    const popupImage = document.querySelector(".popup__image");
-    const popupImageCaption = document.querySelector(".popup__caption");
-
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupImageCaption.textContent = name;
-    openModal(document.querySelector(".popup_type_image"));
-}
-
-function closePopupOnEsc(evt) {
-    if (evt.key === "Escape") {
-        const activePopup = document.querySelector(".popup_is-opened");
-        closeModal(activePopup);
-    }
+// Функция закрытия попапа при нажатии ESC
+export function closePopupOnEsc(evt) {
+  if (evt.key === "Escape") {
+    const activePopup = document.querySelector(".popup_is-opened");
+    closeModalWindow(activePopup);
+  }
 }
