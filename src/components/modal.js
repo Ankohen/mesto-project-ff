@@ -1,16 +1,14 @@
 // Функция открытия попапа
 export function openModalWindow(popup) {
   popup.classList.add("popup_is-opened");
+  document.addEventListener("keydown", closePopupOnEsc);
 }
 
 // Функция закрытия попапа
 export function closeModalWindow(popup) {
   if (popup) {
     popup.classList.remove("popup_is-opened");
-    const form = popup.querySelector("form");
-    if (form) {
-      form.reset();
-    }
+    document.removeEventListener("keydown", closePopupOnEsc);
   }
 }
 
