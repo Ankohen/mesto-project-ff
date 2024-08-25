@@ -11,3 +11,39 @@
 @import url('../blocks/popup/_is-animated/popup_is-animated.css');
 @import url('../blocks/popup/_is-opened/popup_is-opened.css');
 
+.popup__input_type_error {
+    border-bottom-color: red;
+}
+
+.popup__input-error  {
+    color: red;
+    display: none;
+    font-size: 12px;
+    line-height: 14.52px;
+}
+
+.popup__input_error_visible {
+    display: block;
+}
+
+.popup__button_disabled {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    color: rgba(0, 0, 0, .15);
+    pointer-events: none;
+}
+
+.card__like-container {
+    text-align: center;
+    margin: 0;
+}
+
+.card__like-counter {
+    font-size: 13px;
+    line-height: 15.73px;
+    margin: 3px 0 0;
+}
+
+.popup__content_content_delete-card {
+    min-height: 181px;
+}

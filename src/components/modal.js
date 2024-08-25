@@ -1,3 +1,5 @@
+//modal.js
+
 // Функция открытия попапа
 export function openModalWindow(popup) {
   popup.classList.add("popup_is-opened");
