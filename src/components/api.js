@@ -50,21 +50,14 @@ export const addCard = (placeName,linkImg) => {
 }
 
 export const toggleLikebutton = (cardID, isLiked) => {
-  if (isLiked) {
-    return fetch (`${apiConfig.baseUrl}/cards/likes/${cardID}`, {
-      method: "DELETE",
-      headers: apiConfig.headers
-    })
+  const method = isLiked ? "DELETE" : "PUT";
+return fetch(`${apiConfig.baseUrl}/cards/likes/${cardID}`, {
+  method,
+  headers: apiConfig.headers
+})
     .then(res => checkResponse(res))
   }
-  else {
-    return fetch (`${apiConfig.baseUrl}/cards/likes/${cardID}`, {
-      method: "PUT",
-      headers: apiConfig.headers
-    })
-    .then(res => checkResponse(res))
-  }
-}
+
 
 export const deleteCard = (cardID) => {
   return fetch(`${apiConfig.baseUrl}/cards/${cardID}`, {

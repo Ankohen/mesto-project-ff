@@ -8,8 +8,9 @@ import {
   closeOverlayWindow,
   closePopupOnEsc,
 } from "./components/modal.js";
-import { validationConfig, clearValidation, enableValidation } from "./components/validation.js";
+import {clearValidation, enableValidation } from "./components/validation.js";
 import { getUserInfo, getStartingcard, updateUserInfo, addCard, avatarUpdate } from "./components/api.js";
+import { validationConfig } from './components/validationConfig.js';
 
 // DOM элементы
 const placesList = document.querySelector(".places__list");
@@ -18,7 +19,7 @@ const closeButtons = document.querySelectorAll(".popup__close");
 const cardEditButton = document.querySelector(".profile__add-button");
 const nameDisplay = document.querySelector(".profile__title");
 const jobDisplay = document.querySelector(".profile__description");
-const AvatarImage = document.querySelector(".profile__image");
+const avatarimage = document.querySelector(".profile__image");
 const avatarLinkInput = document.getElementById("avatar-link");
 const saveButton = document.querySelector(".popup__button");
 
@@ -45,7 +46,7 @@ let userId = "";
 function setUserInfo(user) {
   nameDisplay.textContent = user.name;
   jobDisplay.textContent = user.about;
-  AvatarImage.style.backgroundImage = `url('${user.avatar}')`;
+  avatarimage.style.backgroundImage = `url('${user.avatar}')`;
   userId = user._id;
 }
 
@@ -70,7 +71,7 @@ avatarFormElement.addEventListener("submit", (event) => {
   const linkImg = avatarLinkInput.value;
   avatarUpdate(linkImg)
     .then(() => {
-      AvatarImage.style.backgroundImage = `url(${linkImg})`;
+      avatarimage.style.backgroundImage = `url(${linkImg})`;
       closeModalWindow(avatarForm);
       avatarFormElement.reset();
     })
@@ -80,7 +81,7 @@ avatarFormElement.addEventListener("submit", (event) => {
     });
 });
 
-AvatarImage.addEventListener("click", () => {
+avatarimage.addEventListener("click", () => {
   openModalWindow(avatarForm);
 });
 
@@ -95,18 +96,16 @@ profileEditButton.addEventListener("click", () => {
 });
 
 // Обработчик нажатия на кнопку добавления карточки
-cardEditButton.addEventListener("click", () => openModalWindow(popupNewCard));
+cardEditButton.addEventListener("click", () => {
+  clearValidation(cardForm, validationConfig);
+  openModalWindow(popupNewCard);
+});
 
 // Обработчик клика для закрытия попапа
 closeButtons.forEach((button) => {
   button.addEventListener("click", (evt) => {
     const popup = evt.target.closest(".popup");
     closeModalWindow(popup);
-    if (popup === popupTypeEdit) {
-      clearValidation(popupTypeEdit, validationConfig);
-    } else if (popup === popupNewCard) {
-      clearValidation(cardForm, validationConfig);
-    }
   });
 });
 

@@ -26,6 +26,11 @@ export function createCard(
   cardTitle.textContent = cardShowing.name;
   likeCounter.textContent = cardShowing.likes.length;
 
+  const userLiked = cardShowing.likes.some(like => like._id === userId);
+  if (userLiked) {
+    likeButton.classList.add('card__like-button_is-active');
+  }
+
 
   likeButton.addEventListener("click", () => 
     likeCallback(cardShowing._id, likeButton, likeCounter)
